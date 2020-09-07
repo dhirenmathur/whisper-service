@@ -11,7 +11,7 @@
     <groupId>com.whisper</groupId>
     <artifactId>poc</artifactId>
     <version>2.3.3.RELEASE</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Whisper</name>
     <description>Demo project for Collab Hacks</description>
 
@@ -68,6 +68,14 @@
                 <configuration>
                     <version>1</version>
                     <projectId>GCLOUD_CONFIG</projectId>
+                    <archive>
+                        <manifest>
+
+                            <!-- give full qualified name of your main class-->
+                            <mainClass>com.whisper.pocs</mainClass>
+
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>
