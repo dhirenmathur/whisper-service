@@ -19,9 +19,8 @@ public class FirebaseInitializer {
         FileInputStream serviceAccount =
                 new FileInputStream("./src/main/service_account_pk.json");
 
-
         FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(serviceAccount)
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setDatabaseUrl("https://whisper-backend.firebaseio.com")
                 .build();
         FirebaseApp.initializeApp(options);
