@@ -15,18 +15,13 @@ public class FirebaseInitializer {
 
     @PostConstruct
     public void initialize() throws IOException {
-        //comment out lines 20-23 before commiting and do not commit the secrets file
-        /*
+
         FileInputStream serviceAccount =
                 new FileInputStream("./src/main/service_account_pk.json");
-        GoogleCredentials cred = GoogleCredentials.fromStream(serviceAccount);
-*/
 
-        //comment out the following line while testing locally
-        GoogleCredentials cred = GoogleCredentials.getApplicationDefault();
 
         FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(cred)
+                .setCredentials(serviceAccount)
                 .setDatabaseUrl("https://whisper-backend.firebaseio.com")
                 .build();
         FirebaseApp.initializeApp(options);

@@ -32,4 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-./src/main/service_account_pk.json
+**/service_account_pk.json
