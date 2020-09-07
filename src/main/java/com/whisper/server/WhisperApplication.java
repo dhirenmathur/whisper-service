@@ -39,7 +39,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = {UserController.class, WhisperConfig.class})
+@ComponentScan(basePackageClasses = {PingController.class, UserController.class, WhisperConfig.class})
 public class WhisperApplication extends SpringBootServletInitializer {
 
     @Override
