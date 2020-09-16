@@ -1,5 +1,6 @@
 package com.whisper.poc;
 
+import com.whisper.server.controller.LoginController;
 import com.whisper.server.controller.UserController;
 import config.WhisperConfig;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = {PingController.class, UserController.class, WhisperConfig.class})
+@ComponentScan(basePackageClasses = {PingController.class, UserController.class, LoginController.class, WhisperConfig.class})
 public class WhisperApplication extends SpringBootServletInitializer {
 
     @Override
