@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.charset.StandardCharsets;
+import java.rmi.ServerException;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -22,15 +23,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getUser/{name}")
-    public Object getUser(@PathVariable(value = "name") String name) throws InterruptedException, ExecutionException, JsonProcessingException {
+    @GetMapping("/user/{name}")
+    public Person getUser(@PathVariable(value = "name") String name) throws InterruptedException, ExecutionException, JsonProcessingException {
         return userService.getUser(name);
     }
 
-    @PostMapping("/createUser")
-    public String postUser(@RequestBody Person person) throws InterruptedException, ExecutionException, JsonProcessingException {
+    @PostMapping("/user/create")
+    public boolean postUser(@RequestBody Person person) throws InterruptedException, ExecutionException, JsonProcessingException, ServerException {
         if (!ObjectUtils.isEmpty(userService.getUser(person.getUsername()))) {
-            return "0";
+            throw new ServerException("Not Found");
         }
         String sha256hex = Hashing.sha256()
                 .hashString(person.getPassword(), StandardCharsets.UTF_8)
