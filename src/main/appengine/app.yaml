@@ -4,3 +4,6 @@ env: flex
 handlers:
   - url: /.*
     script: this field is required, but ignored
+
+network:
+  session_affinity: true
