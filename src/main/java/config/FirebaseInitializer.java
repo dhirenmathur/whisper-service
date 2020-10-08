@@ -21,7 +21,7 @@ public class FirebaseInitializer {
         FirebaseOptions options = new FirebaseOptions.Builder()
                 //.setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .setCredentials(GoogleCredentials.getApplicationDefault())
-                .setDatabaseUrl("https://whisper-backend.firebaseio.com")
+                .setDatabaseUrl("https://whisper-db.firebaseio.com")
                 .build();
         FirebaseApp.initializeApp(options);
     }
