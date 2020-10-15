@@ -15,6 +15,7 @@ import javax.swing.DefaultListSelectionModel;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 
+@Deprecated
 @RestController
 public class LoginController {
     @Autowired

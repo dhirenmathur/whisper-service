@@ -28,8 +28,8 @@ public class UserService {
         return firestore.collection("Users");
     }
 
-    public Person getUser(String username) throws InterruptedException, ExecutionException, JsonProcessingException {
-        DocumentReference docRef = getUsersCollection().document(username);
+    public Person getUser(String uuid) throws InterruptedException, ExecutionException, JsonProcessingException {
+        DocumentReference docRef = getUsersCollection().document(uuid);
         ApiFuture<DocumentSnapshot> future = docRef.get();
 
         DocumentSnapshot document = future.get();

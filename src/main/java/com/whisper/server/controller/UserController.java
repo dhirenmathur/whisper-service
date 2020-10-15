@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.rmi.ServerException;
 import java.util.concurrent.ExecutionException;
 
+@Deprecated
 @RestController
 public class UserController {
 
