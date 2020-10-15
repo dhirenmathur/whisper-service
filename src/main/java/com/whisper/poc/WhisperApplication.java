@@ -2,7 +2,6 @@ package com.whisper.poc;
 
 import com.whisper.server.controller.LoginController;
 import com.whisper.server.controller.UserController;
-import com.whisper.server.service.UserService;
 import config.WhisperConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
