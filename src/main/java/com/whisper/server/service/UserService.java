@@ -45,7 +45,7 @@ public class UserService {
     }
 
     public boolean createUser(Person user) {
-       getUsersCollection().document(user.getUsername()).set(user);
+       getUsersCollection().document(user.getUuid()).set(user);
        return true;
     }
 }

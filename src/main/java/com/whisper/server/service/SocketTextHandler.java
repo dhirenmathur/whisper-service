@@ -34,10 +34,10 @@ public class SocketTextHandler extends TextWebSocketHandler {
             case connect:
                 if (!usernameToSession.containsKey(msg.getUser().getUuid())) {
                     usernameToSession.put(msg.getUser().getUuid(), session);
-                    actionService.onConnect(msg);
                 } else {
                     usernameToSession.replace(msg.getUser().getUuid(), session);
                 }
+                actionService.onConnect(msg);
                 break;
             case disconnect:
                 usernameToSession.remove(msg.getUser().getUuid());
@@ -56,6 +56,8 @@ public class SocketTextHandler extends TextWebSocketHandler {
                 //todo: update invitee list after persisting room details
                 break;
         }
+
+
 
     }
 
