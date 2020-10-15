@@ -9,9 +9,8 @@ public enum ActionType {
     start("start"),
     whisper("whisper"),
     accept("accept"),
-    decline("decline");
+    reject("reject");
 
-     //todo: add mute
 
     private final String name;
 

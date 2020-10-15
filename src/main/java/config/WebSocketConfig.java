@@ -15,7 +15,7 @@ import org.springframework.web.socket.server.standard.ServletServerContainerFact
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer implements WebSocketConfigurer {
 
     @Autowired
-    private  SocketTextHandler socketTextHandler;
+    private SocketTextHandler socketTextHandler;
 
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(socketTextHandler, "/text").setAllowedOrigins("*");

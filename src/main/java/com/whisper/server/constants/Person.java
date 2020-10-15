@@ -17,14 +17,10 @@ import java.util.UUID;
 @JsonSerialize
 @JsonDeserialize(builder = Person.Builder.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonPropertyOrder({ "username", "displayName", "password"})
 public class Person {
 
     @JsonProperty("username")
     private String username;
-
-    @JsonProperty("id")
-    private String id;
 
     @JsonProperty("uuid")
     private String uuid;
