@@ -35,7 +35,7 @@ public class ActionService {
         for (String userId : invitees) {
             WebSocketSession session = userIdToSessionMap.get(userId);
             message.setDestination(Collections.singletonList(userId));
-            session.sendMessage(new TextMessage(message.toString()));
+            session.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
         }
     }
 
