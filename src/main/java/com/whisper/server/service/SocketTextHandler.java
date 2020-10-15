@@ -50,10 +50,8 @@ public class SocketTextHandler extends TextWebSocketHandler {
                 actionService.getOnlineList(msg, usernameToSession);
                 break;
             case accept:
-                //todo: update invitee list after persisting room details
-                break;
             case decline:
-                //todo: update invitee list after persisting room details
+                actionService.onAcceptReject(msg, usernameToSession);
                 break;
         }
 

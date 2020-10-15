@@ -3,6 +3,7 @@ package com.whisper.server.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whisper.server.constants.ActionMessage;
+import com.whisper.server.constants.ActionType;
 import com.whisper.server.constants.Person;
 import com.whisper.server.constants.UserStatusMessage;
 import config.WhisperConfig;
@@ -65,4 +66,9 @@ public class ActionService {
 
     }
 
+
+    public void onAcceptReject(ActionMessage message, Map<String, WebSocketSession> userToSessionMap) throws IOException, JsonProcessingException, ExecutionException, InterruptedException {
+        WebSocketSession sessionId = userToSessionMap.get(message.getDestination().get(0));
+        sessionId.sendMessage(new TextMessage(mapper.writeValueAsString(message)));
+    }
 }
