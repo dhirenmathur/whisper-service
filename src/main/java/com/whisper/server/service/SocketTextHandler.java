@@ -1,56 +1,53 @@
 package com.whisper.server.service;
 
-import java.io.IOException;
-import java.util.HashMap;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whisper.server.constants.ActionMessage;
-import com.whisper.server.constants.ActionType;
-import com.whisper.server.constants.Person;
 import config.WhisperConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.concurrent.ExecutionException;
+
 @Component
-@Import(WhisperConfig.class)
 public class SocketTextHandler extends TextWebSocketHandler {
 
-    private CallInitiatorService callInitiatorService = new CallInitiatorService();
+    @Autowired
+    private ActionService actionService;
 
     HashMap<String, WebSocketSession> usernameToSession = new HashMap<>();
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message)
-            throws InterruptedException, IOException {
+            throws InterruptedException, IOException, ExecutionException {
         String payload = message.getPayload();
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode = mapper.readTree(payload);
-        ActionMessage msg =  mapper.treeToValue(jsonNode,ActionMessage.class);
-
-        switch (msg.getActionType()){
+        ActionMessage msg = mapper.treeToValue(jsonNode, ActionMessage.class);
+        switch (msg.getActionType()) {
             case connect:
-                if(!usernameToSession.containsKey(msg.getInitiator())){
-                    usernameToSession.put(msg.getInitiator(),session);
+                if (!usernameToSession.containsKey(msg.getUser().getUuid())) {
+                    usernameToSession.put(msg.getUser().getUuid(), session);
+                    actionService.onConnect(msg);
                 } else {
-                    usernameToSession.replace(msg.getInitiator(),session);
-                    System.out.println(usernameToSession.toString());
+                    usernameToSession.replace(msg.getUser().getUuid(), session);
                 }
                 break;
             case disconnect:
-                usernameToSession.remove(msg.getInitiator());
-                System.out.println(usernameToSession.toString());
+                usernameToSession.remove(msg.getUser().getUuid());
                 break;
             case start:
-                callInitiatorService.routeToInvitee(msg,usernameToSession);
-                break;
             case whisper:
-                callInitiatorService.routeToInvitee(msg,usernameToSession);
+                actionService.routeToInvitee(msg, usernameToSession);
+                break;
+            case online:
+                actionService.getOnlineList(msg, usernameToSession);
                 break;
             case accept:
                 //todo: update invitee list after persisting room details

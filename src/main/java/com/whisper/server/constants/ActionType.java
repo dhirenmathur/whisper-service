@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum ActionType {
     connect("connect"),
+    online("online"),
     disconnect("disconnect"),
     start("start"),
     whisper("whisper"),

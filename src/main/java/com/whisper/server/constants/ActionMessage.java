@@ -17,20 +17,16 @@ import java.util.List;
 @JsonSerialize
 @JsonDeserialize(builder = ActionMessage.Builder.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-@JsonPropertyOrder({ "actionType"})
 public class ActionMessage {
 
     @JsonProperty("actionType")
     private ActionType actionType;
 
-    @JsonProperty(("target"))
-    private List<String> target;
+    @JsonProperty("destination")
+    private List<String> destination;
 
-    @JsonProperty("initiator")
-    private  String initiator;
-
-    @JsonProperty("roomId")
-    private  String roomId;
+    @JsonProperty("user")
+    private Person user;
 
     @JsonPOJOBuilder(withPrefix = "")
     public static class Builder {

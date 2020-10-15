@@ -30,13 +30,6 @@ public class UserController {
 
     @PostMapping("/user/create")
     public boolean postUser(@RequestBody Person person) throws InterruptedException, ExecutionException, JsonProcessingException, ServerException {
-        if (!ObjectUtils.isEmpty(userService.getUser(person.getUsername()))) {
-            throw new ServerException("Not Found");
-        }
-        String sha256hex = Hashing.sha256()
-                .hashString(person.getPassword(), StandardCharsets.UTF_8)
-                .toString();
-        person.setPassword(sha256hex);
         return userService.createUser(person);
 
     }
